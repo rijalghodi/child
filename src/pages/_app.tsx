@@ -3,6 +3,7 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
 import { SessionProvider } from "next-auth/react";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 // import {
 //   ApolloClient,
@@ -14,11 +15,10 @@ import { SessionProvider } from "next-auth/react";
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
-  // const client = new ApolloClient({
-  //   uri: "https://api.dashboard.modules.dev.optimining.optimap.id/graphql",
-  //   cache: new InMemoryCache(),
-  // });
-
+  const client = new ApolloClient({
+    uri: "https://api.dashboard.modules.dev.optimining.optimap.id/graphql",
+    cache: new InMemoryCache(),
+  });
   return (
     <>
       <Head>
@@ -37,9 +37,11 @@ export default function App(props: AppProps) {
           colorScheme: "dark",
         }}
       >
-        <SessionProvider session={pageProps.session}>
-          <Component {...pageProps} />
-        </SessionProvider>
+        <ApolloProvider client={client}>
+          <SessionProvider session={pageProps.session}>
+            <Component {...pageProps} />
+          </SessionProvider>
+        </ApolloProvider>
       </MantineProvider>
     </>
   );

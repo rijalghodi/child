@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-// import Link from "next/link";
+import Link from "next/link";
 
-const Link = dynamic(() => import("next/link"), {
-  ssr: false,
-});
+// const Link = dynamic(() => import("next/link"), {
+//   ssr: false,
+// });
 
 type Props = {};
 import style from "./styles.module.css";
 import { useQuery, gql } from "@apollo/client";
 
-import { Box, Button, Group, Stack } from "@mantine/core";
+import { Box, Button, Group, Stack, Title } from "@mantine/core";
 import { useSession } from "next-auth/react";
 
 const BARGING = gql`
@@ -49,14 +49,20 @@ export default function Content(props: Props) {
   }
 
   return (
-    <div>
-      <Stack>
-        {/* <Box>
-          <pre>{JSON.stringify(session)}</pre>
-        </Box> */}
-        <Box>
-          <Link href="/">Test Next Link</Link>
-        </Box>
+    <Stack bg="gray.7" p={24}>
+      {/* <Box>
+        <pre>{JSON.stringify(session)}</pre>
+      </Box> */}
+      <Box>
+        <Title order={2} mb="sm">
+          Test Next Link
+        </Title>
+        <Link href="/">Go to Home</Link>
+      </Box>
+      <Box>
+        <Title order={2} mb="sm">
+          Test Local State
+        </Title>
         <Group>
           <button
             onClick={() => setNum(num + 1)}
@@ -79,9 +85,20 @@ export default function Content(props: Props) {
             Kali 2 (Mantine Comp)
           </Button>
         </Group>
-      </Stack>
-      <p className="text-xl text-center mt-4">{num}</p>
-      <pre>{JSON.stringify(data)}</pre>
-    </div>
+        <p className="text-xl text-center mt-4">{num}</p>
+      </Box>
+      <Box>
+        <Title order={2} mb="sm">
+          Test use Effect
+        </Title>
+        <pre>{JSON.stringify(haha)}</pre>
+      </Box>
+      <Box>
+        <Title order={2} mb="sm">
+          Test Apollo Client
+        </Title>
+        <pre>{JSON.stringify(data)}</pre>
+      </Box>
+    </Stack>
   );
 }
