@@ -26,7 +26,7 @@ const BARGING = gql`
 
 export default function Content(props: Props) {
   const { loading, error, data } = useQuery(BARGING);
-  const session = useSession();
+  // const session = useSession();
   const [num, setNum] = useState(1);
   const [haha, setHaha] = useState("");
 
@@ -51,9 +51,9 @@ export default function Content(props: Props) {
   return (
     <div>
       <Stack>
-        <Box>
+        {/* <Box>
           <pre>{JSON.stringify(session)}</pre>
-        </Box>
+        </Box> */}
         <Box>
           <Link href="/">Test Next Link</Link>
         </Box>
