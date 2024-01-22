@@ -16,9 +16,9 @@ export default function Expose(props: Props) {
   return (
     <div>
       <ApolloProvider client={client}>
-        {/* <SessionProvider session={props.pageProps.session}> */}
-        <Content />
-        {/* </SessionProvider> */}
+        <SessionProvider>
+          <Content />
+        </SessionProvider>
       </ApolloProvider>
     </div>
   );

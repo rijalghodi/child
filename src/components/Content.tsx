@@ -1,103 +1,63 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
+// import Link from "next/link";
 
-// const Link = dynamic(() => import("next/link"), {
-//   ssr: false,
-// });
+const Link = dynamic(() => import("next/link"), {
+  ssr: false,
+});
 
 type Props = {};
 import style from "./styles.module.css";
 import { useQuery, gql } from "@apollo/client";
 
-import { Box, Button, Group, Stack, Title } from "@mantine/core";
+import { Box, Button, Group, Stack, Text, Title } from "@mantine/core";
 import { useSession } from "next-auth/react";
-
-const BARGING = gql`
-  query OverviewBarging {
-    overviewBarging {
-      total
-      barging
-      percentDeviation
-      unit
-    }
-  }
-`;
+import LocalStateTest from "./LocalStateTest";
+import StyleTest from "./StyleTest";
+import { ApolloTest } from "./ApolloTest";
+import UseEffectText from "./UseEffectText";
+import SessionTest from "./SessionTest";
 
 export default function Content(props: Props) {
-  const { loading, error, data } = useQuery(BARGING);
-  // const session = useSession();
-  const [num, setNum] = useState(1);
-  const [haha, setHaha] = useState("");
-
-  useEffect(() => {
-    const bar = async () => {
-      const foo = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-      const response = await foo.json();
-      const result = JSON.stringify(response);
-      return result;
-    };
-
-    bar().then((v) => setHaha(v));
-  }, []);
-
-  if (error) {
-    return <div>Error</div>;
-  }
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const session = useSession();
 
   return (
-    <Stack bg="gray.7" p={24}>
-      {/* <Box>
-        <pre>{JSON.stringify(session)}</pre>
-      </Box> */}
+    <Stack bg="gray.7" p={24} spacing={48}>
       <Box>
         <Title order={2} mb="sm">
-          Test Next Link
+          Session Test
+        </Title>
+        <SessionTest />
+      </Box>
+      <Box>
+        <Title order={2} mb="sm">
+          Style Test
+        </Title>
+        <StyleTest />
+      </Box>
+      <Box>
+        <Title order={2} mb="sm">
+          Next Link Test
         </Title>
         <Link href="/">Go to Home</Link>
       </Box>
       <Box>
-        <Title order={2} mb="sm">
-          Test Local State
+        <Title order={2} mb="md">
+          Local State Test
         </Title>
-        <Group>
-          <button
-            onClick={() => setNum(num + 1)}
-            className={style.primaryButton}
-          >
-            Tambah (Module.css)
-          </button>
-          <button
-            onClick={() => setNum(num - 1)}
-            className="px-4 py-2 bg-orange-400 text-slate-700 rounded-md"
-          >
-            Kurang (Tailwind Class)
-          </button>
-          <Button
-            radius="xl"
-            color="lime"
-            variant="filled"
-            onClick={() => setNum(num * 2)}
-          >
-            Kali 2 (Mantine Comp)
-          </Button>
-        </Group>
-        <p className="text-xl text-center mt-4">{num}</p>
+        <LocalStateTest />
       </Box>
       <Box>
         <Title order={2} mb="sm">
-          Test use Effect
+          Apollo Client Test
         </Title>
-        <pre>{JSON.stringify(haha)}</pre>
+        <ApolloTest />
       </Box>
       <Box>
         <Title order={2} mb="sm">
-          Test Apollo Client
+          use Effect Test
         </Title>
-        <pre>{JSON.stringify(data)}</pre>
+        <UseEffectText />
       </Box>
     </Stack>
   );
