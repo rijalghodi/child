@@ -39,7 +39,9 @@ export default function Content(props: Props) {
         <Title order={2} mb="sm">
           Next Link Test
         </Title>
-        <Link href="/">Go to Home</Link>
+        <Link href="/" style={{ color: "cyan" }}>
+          Go to Home
+        </Link>
       </Box>
       <Box>
         <Title order={2} mb="md">
