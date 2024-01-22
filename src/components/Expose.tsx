@@ -1,5 +1,5 @@
 import React from "react";
-import PlusButton from "./PlusButton";
+import Content from "./Content";
 import {
   ApolloClient,
   InMemoryCache,
@@ -15,7 +15,7 @@ export default function Expose(props: Props) {
   return (
     <div>
       <ApolloProvider client={client}>
-        <PlusButton />
+        <Content />
       </ApolloProvider>
     </div>
   );

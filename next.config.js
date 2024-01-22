@@ -19,7 +19,6 @@ const nextConfig = {
         // filename: "static/chunks/remoteEntry.js",
         filename: `static/${isServer ? "ssr" : "chunks"}/remoteEntry.js`,
         exposes: {
-          "./PlusButton": "./src/components/PlusButton.tsx",
           "./Expose": "./src/components/Expose.tsx",
         },
         // remotes: {

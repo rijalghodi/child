@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 // import Link from "next/link";
 
 const Link = dynamic(() => import("next/link"), {
@@ -10,7 +11,6 @@ import style from "./styles.module.css";
 import { useQuery, gql } from "@apollo/client";
 
 import { Button } from "@mantine/core";
-import dynamic from "next/dynamic";
 
 const BARGING = gql`
   query OverviewBarging {
@@ -23,7 +23,7 @@ const BARGING = gql`
   }
 `;
 
-export default function PlusButton(props: Props) {
+export default function Content(props: Props) {
   const { loading, error, data } = useQuery(BARGING);
 
   const [num, setNum] = useState(1);
