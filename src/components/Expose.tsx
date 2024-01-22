@@ -6,6 +6,7 @@ import {
   ApolloProvider,
   gql,
 } from "@apollo/client";
+import { SessionProvider } from "next-auth/react";
 type Props = {};
 export default function Expose(props: Props) {
   const client = new ApolloClient({
@@ -15,7 +16,9 @@ export default function Expose(props: Props) {
   return (
     <div>
       <ApolloProvider client={client}>
+        {/* <SessionProvider session={props.pageProps.session}> */}
         <Content />
+        {/* </SessionProvider> */}
       </ApolloProvider>
     </div>
   );

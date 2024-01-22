@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
+import { SessionProvider } from "next-auth/react";
 
 // import {
 //   ApolloClient,
@@ -36,7 +37,9 @@ export default function App(props: AppProps) {
           colorScheme: "dark",
         }}
       >
-        <Component {...pageProps} />
+        <SessionProvider session={pageProps.session}>
+          <Component {...pageProps} />
+        </SessionProvider>
       </MantineProvider>
     </>
   );

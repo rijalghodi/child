@@ -10,7 +10,8 @@ type Props = {};
 import style from "./styles.module.css";
 import { useQuery, gql } from "@apollo/client";
 
-import { Button } from "@mantine/core";
+import { Box, Button, Group, Stack } from "@mantine/core";
+import { useSession } from "next-auth/react";
 
 const BARGING = gql`
   query OverviewBarging {
@@ -25,7 +26,7 @@ const BARGING = gql`
 
 export default function Content(props: Props) {
   const { loading, error, data } = useQuery(BARGING);
-
+  const session = useSession();
   const [num, setNum] = useState(1);
   const [haha, setHaha] = useState("");
 
@@ -49,28 +50,37 @@ export default function Content(props: Props) {
 
   return (
     <div>
-      <div className="flex gap-4">
-        <Link href="/">Test Next Link</Link>
-        <button onClick={() => setNum(num + 1)} className={style.primaryButton}>
-          Tambah (Module.css)
-        </button>
-        <button
-          onClick={() => setNum(num - 1)}
-          className="px-4 py-2 bg-orange-400 text-slate-700 rounded-md"
-        >
-          Kurang (Tailwind Class)
-        </button>
-        <Button
-          radius="xl"
-          color="lime"
-          variant="filled"
-          onClick={() => setNum(num * 2)}
-        >
-          Kali 2 (Mantine Comp)
-        </Button>
-      </div>
+      <Stack>
+        <Box>
+          <pre>{JSON.stringify(session)}</pre>
+        </Box>
+        <Box>
+          <Link href="/">Test Next Link</Link>
+        </Box>
+        <Group>
+          <button
+            onClick={() => setNum(num + 1)}
+            className={style.primaryButton}
+          >
+            Tambah (Module.css)
+          </button>
+          <button
+            onClick={() => setNum(num - 1)}
+            className="px-4 py-2 bg-orange-400 text-slate-700 rounded-md"
+          >
+            Kurang (Tailwind Class)
+          </button>
+          <Button
+            radius="xl"
+            color="lime"
+            variant="filled"
+            onClick={() => setNum(num * 2)}
+          >
+            Kali 2 (Mantine Comp)
+          </Button>
+        </Group>
+      </Stack>
       <p className="text-xl text-center mt-4">{num}</p>
-      <pre>{haha}</pre>
       <pre>{JSON.stringify(data)}</pre>
     </div>
   );
