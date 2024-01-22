@@ -28,10 +28,10 @@ const nextConfig = {
         // },
         shared: {
           // whatever else
-          // "next/link": {
-          //   singleton: true,
-          //   eager: false,
-          // },
+          "next/link": {
+            singleton: true,
+            eager: false,
+          },
         },
       })
     );
