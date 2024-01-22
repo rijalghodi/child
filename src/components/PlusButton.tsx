@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
+// import Link from "next/link";
+
+const Link = dynamic(() => import("next/link"), {
+  ssr: false,
+});
+
 type Props = {};
 import style from "./styles.module.css";
 import { useQuery, gql } from "@apollo/client";
 
 import { Button } from "@mantine/core";
+import dynamic from "next/dynamic";
 
 const BARGING = gql`
   query OverviewBarging {
@@ -43,6 +50,7 @@ export default function PlusButton(props: Props) {
   return (
     <div>
       <div className="flex gap-4">
+        <Link href="/">Test Next Link</Link>
         <button onClick={() => setNum(num + 1)} className={style.primaryButton}>
           Tambah (Module.css)
         </button>
